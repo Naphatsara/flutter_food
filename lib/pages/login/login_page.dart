@@ -106,10 +106,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleClickButton(int number) {
-    add++;
-    print("pin $number");
-    print(input.length);
-    // input.length -- ถ้าครบเท่ากับ 123456 มั้ย ถ้าใช่ show ถูก ไม่ใช่ show ผิด แล้ว push
     setState(() {
       if (number == -1) {
         if (input.length > 0) input = input.substring(0, input.length - 1);
@@ -169,6 +165,29 @@ class LoginButton extends StatelessWidget {
                     )
                   : SizedBox.shrink()),
         ),
+      ),
+    );
+  }
+}
+
+
+// Homepage
+
+import 'package:flutter/material.dart';
+class Homepage extends StatelessWidget {
+  const Homepage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("FLUTTER FOOD"),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(child: Text('THIS IS A HOME PAGE',style:Theme.of(context).textTheme.headline1,)),
+        ],
       ),
     );
   }
