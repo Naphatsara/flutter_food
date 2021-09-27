@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/pages/login/home_page.dart';
+import 'package:flutter_food/pages/home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
+  static const routeName = '/login';
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -38,44 +39,65 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            /*stops: [ ไล่สี
+              0.0,
+              0.95,
+              1.0,
+            ],*/
+            colors: [
+              Colors.white,
+              //Color(0xFFD8D8D8),
+              //Color(0xFFAAAAAA),
+              Theme.of(context).colorScheme.background.withOpacity(0.5),
+              //Theme.of(context).colorScheme.background.withOpacity(0.6),
+              //Colors.white,
+            ],
+          ),
+        ),
         child: SafeArea(
           child: Column(
             children: [
               Expanded(
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.lock_outline,
-                        size: 100.0,
-                      ),
-                      Text(
-                        'LOGIN',
-                        style: Theme.of(context).textTheme.headline1,
-                      ),
-                      SizedBox(height: 4.0),
-                      Text('Enter PIN to login'),
-                      SizedBox(height: 20.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          for (var i = 0; i < input.length; i++)
-                            Icon(
-                              Icons.circle,
-                              size: 30.0,
-                              color: Colors.blue,
-                            ),
-                          for (var i = 0; i < 6-input.length; i++)
-                            Icon(
-                              Icons.circle_outlined,
-                              size: 30.0,
-                              color: Colors.blue,
-                            )
-                        ],
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.lock_outline,
+                          size: 100.0,
+                        ),
+                        Text(
+                          'LOGIN',
+                          style: Theme.of(context).textTheme.headline1,
+                        ),
+                        SizedBox(height: 4.0),
+                        Text('Enter PIN to login'),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        for (var i = 0; i < input.length; i++)
+                          Icon(
+                            Icons.circle,
+                            size: 30.0,
+                            color: Colors.amber,
+                          ),
+                        for (var i = 0; i < 6 - input.length; i++)
+                          Icon(
+                            Icons.circle_outlined,
+                            size: 30.0,
+                            color: Colors.amber,
+                          )
+                      ],
+                    ),
+                  ],
                 ),
               ),
               Container(
@@ -120,10 +142,11 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       if (input.length == 6) {
         if (input == '123456') {
-          Navigator.pushReplacement(
+          /*Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => Homepage()),
-          );
+          )*/
+          Navigator.pushReplacementNamed(context, Homepage.routeName); //ตัวแปรสีม่วง = instance of class , สีขาว = local
         } else {
           _showMaterialDialog('ERROR', 'Invalid PIN. Please try again');
           input = '';
