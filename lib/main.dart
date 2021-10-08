@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/models/food_details.dart';
 import 'package:flutter_food/pages/home/food_page.dart';
 import 'package:flutter_food/pages/home/foodlist_page.dart';
 import 'package:flutter_food/pages/home/home_page.dart';
@@ -27,11 +28,12 @@ class MyApp extends StatelessWidget {
       //home: LoginPage(),
       routes: { //กำหนด routes แทนว่าจะไปที่หน้าไหน
         LoginPage.routeName :(context) => const LoginPage(),
-        Homepage.routeName : (context) => const Homepage(),
+        HomePage.routeName : (context) => const HomePage(),
         FoodPage.routeName : (context) => const FoodPage(),
         ProfilePage.routeName : (context) => const ProfilePage(),
         FoodListPage.routeName: (context) => const FoodListPage(),
         OrderPage.routeName: (context) => const OrderPage(),
+        FoodDetails.routeName: (context) => const FoodDetails(),
       },
       initialRoute: LoginPage.routeName, //กำหนด widget หลัก / ระบุื่อ route
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/pages/home/home_page.dart';
+
 class ProfilePage extends StatefulWidget {
   static const routeName = '/profile';
   const ProfilePage({Key? key}) : super(key: key);
@@ -12,8 +12,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Profile'),),
-      //drawer: Homepage(),
       body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

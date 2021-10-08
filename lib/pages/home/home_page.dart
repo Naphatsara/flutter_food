@@ -1,26 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/pages/home/food_page.dart';
 import 'package:flutter_food/pages/home/profile_page.dart';
-import 'package:flutter_food/pages/login/login_page.dart';
 
-class Homepage extends StatefulWidget {
+
+class HomePage extends StatefulWidget {
   static const routeName =
       '/home'; //การดึงค่าคงที่มาใช้และให้เป็น compile time จะทำการแทนที่ routeName ด้วย /home เวลาแก้จะได้แก้ที่เดียว
-  const Homepage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomepageState createState() => _HomepageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomepageState extends State<Homepage> {
-  var _subPageIndex = 2;
-  //var _selectedBottomNavIndex = 0;
+class _HomePageState extends State<HomePage> {
+  var _selectedDrawerItemIndex = 0;
+
+  final _pageDataList = [
+    {
+      'icon': Icons.fastfood,
+      'title': 'Food',
+      'page': FoodPage(),
+    },
+    {
+      'icon': Icons.person,
+      'title': 'Profile',
+      'page': ProfilePage(),
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home page"),
+        title: Text(_pageDataList[_selectedDrawerItemIndex]['title'] as String),
       ),
       drawer: Drawer(
         child: ListView(
@@ -52,44 +64,38 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
             ),
-            ListTile(
-                title: _buildDrawerItem(Icon(Icons.fastfood), 'FOOD'),
-                onTap: (){
-                  Navigator.pushNamed(context, FoodPage.routeName);
-                }
-            ),
-            ListTile(
-                title: _buildDrawerItem(Icon(Icons.person), 'PROFILE'),
-                onTap: () {
-                  Navigator.pushNamed(context, ProfilePage.routeName);
-                }
+            for (var item in _pageDataList)
+              ListTile(
+                title: Row(
+                  children: [
+                    Icon(
+                      item['icon'] as IconData,
+                      color: item == _pageDataList[_selectedDrawerItemIndex]
+                          ? Theme.of(context).accentColor
+                          : null,
+                    ),
+                    SizedBox(width: 8.0),
+                    Text(item['title'] as String),
+                  ],
                 ),
+                onTap: () {
+                  setState(() {
+                    _selectedDrawerItemIndex =
+                        _pageDataList.indexWhere((element) => item == element);
+                  });
+                  Navigator.of(context).pop();
+                },
+                selected: item == _pageDataList[_selectedDrawerItemIndex],
+              ),
           ],
         ),
       ),
-      body: Center(
-        child: Text(
-          'HOME PAGE',
-          style: Theme.of(context).textTheme.headline6,
-        ),
+      body: Container(
+        child: _pageDataList[_selectedDrawerItemIndex]['page'] as Widget,
       ),
     );
   }
-  Row _buildDrawerItem(Widget icon, String title) {
-    return Row(
-      children: [
-        icon,
-        SizedBox(width: 8.0),
-        Text(title),
-      ],
-    );
-  }
-  _showSubPage(int index) {
-    setState(() {
-      _subPageIndex = index;
-    });
-    Navigator.of(context).pop();
-  }
+}
 
   /*Widget _buildSubPage() {
     switch (_subPageIndex) {
@@ -127,4 +133,4 @@ class _HomepageState extends State<Homepage> {
   }*/
 
 
-}
+

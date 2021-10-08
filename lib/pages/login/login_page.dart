@@ -142,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(builder: (context) => Homepage()),
           )*/
-          Navigator.pushReplacementNamed(context, Homepage.routeName); //ตัวแปรสีม่วง = instance of class , สีขาว = local
+          Navigator.pushReplacementNamed(context, HomePage.routeName); //ตัวแปรสีม่วง = instance of class , สีขาว = local
         } else {
           _showMaterialDialog('ERROR', 'Invalid PIN. Please try again');
           input = '';
@@ -194,24 +194,4 @@ class LoginButton extends StatelessWidget {
 }
 
 
-// Homepage
 
-import 'package:flutter/material.dart';
-class Homepage extends StatelessWidget {
-  const Homepage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("FLUTTER FOOD"),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(child: Text('THIS IS A HOME PAGE',style:Theme.of(context).textTheme.headline1,)),
-        ],
-      ),
-    );
-  }
-}
